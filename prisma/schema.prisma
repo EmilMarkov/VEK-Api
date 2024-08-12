@@ -1,0 +1,27 @@
+generator client {
+  provider = "cargo prisma"
+  output   = "../src/prisma.rs"
+  module_path = "crate::prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:veklauncher.db"
+}
+
+model User {
+  id         String      @id @default(cuid())
+  login      String      @unique
+  updated_at DateTime    @updatedAt
+  yandexAuth YandexAuth?
+}
+
+model YandexAuth {
+  token_type      String
+  access_token    String   @unique
+  expires_in      Int
+  refresh_token   String
+  scope           String
+  user            User?     @relation(fields: [userId], references: [id])
+  userId          String?   @unique
+}

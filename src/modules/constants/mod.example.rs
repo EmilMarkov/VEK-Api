@@ -1,0 +1,1 @@
+pub static API_SECRET: &str = "YOUR_API_SECRET";

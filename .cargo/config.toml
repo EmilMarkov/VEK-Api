@@ -1,0 +1,19 @@
+#[source.crates-io]
+#replace-with = "vendored-sources"
+
+[source.vendored-sources]
+directory = "vendor"
+
+[build]
+incremental = true
+rustflags = ["-C", "symbol-mangling-version=v0"]
+
+[rust]
+debuginfo-level = 1
+
+[alias]
+prisma = "run -p prisma-cli"
+
+# This is a workaround for failing connection on git repositories fetching
+#[http]
+#check-revoke = false
