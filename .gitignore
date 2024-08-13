@@ -20,6 +20,10 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
+Cargo.lock
+*.db
+*.db-journal
+
 # nyc test coverage
 .nyc_output
 
