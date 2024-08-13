@@ -11,3 +11,41 @@ pub mod auth {
     pub scope: String,
   }
 }
+
+pub mod games {
+  use serde::{Deserialize, Serialize};
+
+  #[derive(Clone)] 
+  #[derive(Serialize, Deserialize)]
+  pub struct GameListRequest {
+    pub page: Option<usize>,
+    pub next: Option<String>,
+  }
+
+  #[derive(Clone)] 
+  #[derive(Serialize, Deserialize)]
+  pub struct GameSearchRequest {
+    pub query: String,
+    pub next: Option<String>,
+  }
+
+  #[derive(Clone)] 
+  #[derive(Serialize, Deserialize)]
+  pub struct GameDetailsRequest {
+    pub id: i32,
+  }
+
+  #[derive(Clone)] 
+  #[derive(Serialize, Deserialize)]
+  pub struct GameScreenshotsRequest {
+    pub page: Option<usize>,
+    pub next: Option<String>,
+  }
+
+  #[derive(Clone)] 
+  #[derive(Serialize, Deserialize)]
+  pub struct GameMoviesRequest {
+    pub page: Option<usize>,
+    pub next: Option<String>,
+  }
+}
