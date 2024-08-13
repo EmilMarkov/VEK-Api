@@ -54,15 +54,14 @@ pub fn get_config(conf: &mut web::ServiceConfig) {
 }
 
 pub async fn run(tcp_listener: TcpListener, data: PrismaClient) -> Result<Server, std::io::Error> {
-    let data = Arc::new(data);  // Оборачиваем PrismaClient в Arc
-    let data_web = web::Data::from(data.clone());  // Создаем web::Data<Arc<PrismaClient>>
+    let data = Arc::new(data);
+    let data_web = web::Data::from(data.clone());
 
     let games_middleware = GamesMiddleware::new().await;
     let games_middleware = web::Data::new(Arc::new(games_middleware));
 
     let private_key = actix_web::cookie::Key::from(API_SECRET.as_bytes());
 
-    // Инициализация TorrentService и запуск процесса инициализации торрентов
     let torrent_service = TorrentService::new(data.clone());
     if let Err(err) = torrent_service.initialize_torrents().await {
         error!("Ошибка при инициализации торрентов: {:?}", err);
@@ -82,7 +81,7 @@ pub async fn run(tcp_listener: TcpListener, data: PrismaClient) -> Result<Server
             )
             .wrap(middleware::NormalizePath::trim())
             .wrap(middleware::Logger::default())
-            .app_data(data_web.clone())  // Передаем web::Data<Arc<PrismaClient>> в App
+            .app_data(data_web.clone()) 
             .app_data(games_middleware.clone()) 
             .app_data(torrent_service.clone())
             .default_service(web::route().to(not_found))

@@ -24,7 +24,7 @@ async fn get_game_list(
     let request = data.into_inner();
     match middleware
         .execute_with_retry(move |api_key| {
-            let req = request.clone(); // Клонирование переменной request
+            let req = request.clone();
             async move { GamesService::get_game_list(api_key, req).await }
         })
         .await {
@@ -41,7 +41,7 @@ async fn search_game(
     let request = data.into_inner();
     match middleware
         .execute_with_retry(move |api_key| {
-            let req = request.clone(); // Клонирование переменной request
+            let req = request.clone();
             async move { GamesService::search_game(api_key, req).await }
         })
         .await {

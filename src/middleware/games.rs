@@ -39,7 +39,6 @@ impl GamesMiddleware {
             Ok(result) => Ok(result),
             Err(err) => {
                 if err.status() == Some(reqwest::StatusCode::UNAUTHORIZED) {
-                    // Обновляем ключ API
                     if let Ok(new_api_key) = Self::update_api_key().await {
                         let mut key = self.api_key.lock().await;
                         *key = new_api_key.clone();

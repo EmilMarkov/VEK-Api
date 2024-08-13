@@ -35,7 +35,7 @@ impl ProviderDODI {
             }
             Err(e) => {
                 println!("Error getting total pages: {}", e);
-                Ok(()) // Продолжаем выполнение даже при ошибке
+                Ok(())
             }
         }
     }

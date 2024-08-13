@@ -31,7 +31,6 @@ pub fn set_database_url() -> Result<(), Box<dyn std::error::Error>> {
     let db_path = get_database_path()?;
     let db_url = format!("file:{}", db_path.to_string_lossy());
 
-    // Выводим путь к базе данных для отладки
     println!("Database path: {}", db_url);
 
     env::set_var("DATABASE_URL", &db_url);
