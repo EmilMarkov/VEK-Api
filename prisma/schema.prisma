@@ -1,6 +1,6 @@
 generator client {
-  provider = "cargo prisma"
-  output   = "../src/prisma.rs"
+  provider    = "cargo prisma"
+  output      = "../src/prisma.rs"
   module_path = "crate::prisma"
 }
 
@@ -24,4 +24,11 @@ model YandexAuth {
   scope           String
   user            User?     @relation(fields: [userId], references: [id])
   userId          String?   @unique
+}
+
+model Torrent {
+  id        String @id @default(cuid())
+  name      String
+  repacker  String
+  torrent   String
 }

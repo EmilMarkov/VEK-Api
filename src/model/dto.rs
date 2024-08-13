@@ -49,3 +49,19 @@ pub mod games {
     pub next: Option<String>,
   }
 }
+
+pub mod torrent {
+  use serde::{Deserialize, Serialize};
+
+  #[derive(Clone, Serialize, Deserialize)]
+  pub struct TorrentInfoRequest {
+    pub name: String,
+  }
+
+  #[derive(Clone, Serialize, Deserialize)]
+  pub struct TorrentInfoResponse {
+    pub updated: String,
+    pub magnet: String,
+  }
+}
+
