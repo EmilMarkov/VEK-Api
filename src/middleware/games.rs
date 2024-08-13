@@ -1,19 +1,15 @@
-use reqwest::Client;
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
 pub struct GamesMiddleware {
-    client: Arc<Client>,
     api_key: Arc<Mutex<String>>,
 }
 
 impl GamesMiddleware {
     pub async fn new() -> Self {
-        let client = Client::new();
         let api_key = Self::update_api_key().await.unwrap_or_else(|_| String::new());
 
         GamesMiddleware {
-            client: Arc::new(client),
             api_key: Arc::new(Mutex::new(api_key)),
         }
     }
