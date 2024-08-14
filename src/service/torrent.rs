@@ -20,7 +20,21 @@ impl TorrentService {
 		TorrentService { prisma_client }
 	}
 
+	async fn clear_torrents(&self) -> Result<(), String> {
+		self.prisma_client
+			.torrent()
+			.delete_many(vec![])
+			.exec()
+			.await
+			.map_err(|e| format!("Failed to clear torrents: {}", e))?;
+
+		println!("Таблица торрентов очищена.");
+		Ok(())
+	}
+
 	pub async fn initialize_torrents(&self) -> Result<(), String> {
+		self.clear_torrents().await?;
+		
 		let providers: Vec<(&str, Box<dyn TorrentProvider>)> = vec![
 			("DODI", Box::new(ProviderDODI::new(self.prisma_client.clone()))),
 			("FitGirl", Box::new(ProviderFitGirl::new(self.prisma_client.clone()))),

@@ -96,3 +96,5 @@ impl TorrentProvider for ProviderGOG {
         Ok(vec![])
     }
 }
+
+// TODO: Исправить парсинг торрентов GOG
